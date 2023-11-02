@@ -1,12 +1,12 @@
 package com.example;
 
 public class Person {
-    private Integer id;
+    private int id;
     private String name;
     private String phoneNumber;
     private Integer experience;
 
-    public Person(Integer id, String name, String phoneNumber, Integer experience) {
+    public Person(int id, String name, String phoneNumber, int experience) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -14,7 +14,7 @@ public class Person {
     }
     
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -38,11 +38,18 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getExperience() {
+    public int getExperience() {
         return experience;
     }
 
-    public void setExperience(Integer experience) {
+    public void setExperience(int experience) {
         this.experience = experience;
-    }        
+    }
+
+
+    @Override
+    public String toString()
+    {
+        return getId() + " " + getName() + " " + getPhoneNumber() + " " + getExperience();
+    }
 }

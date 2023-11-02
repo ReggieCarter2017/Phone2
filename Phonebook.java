@@ -4,33 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Phonebook {
-    public static void addPerson(ArrayList<Person> persons, String name, String phoneNumber, int experience)
-    {
-        int maxId = persons.stream().mapToInt(Person::getId).max().getAsInt();
-        persons.add(new Person(maxId + 1, name, phoneNumber, experience));
-    }
-    
-    public static List<String> findPhonesByName(List<Person> persons, String name) {
-        return persons.stream().filter(p -> p.getName().equalsIgnoreCase(name)).map(p -> p.getPhoneNumber()).toList();
+    static void addPerson(ArrayList<Person> list, String phone, String name, int experience) {
+        int lastId = list.stream().mapToInt(Person::getId).max().getAsInt();
+        list.add(new Person(lastId + 1, phone, name, experience));
     }
 
-    public static Person findByExperience(List<Person> persons, int experience) {
-        assert persons != null : "LIST";
-        var person = persons.stream().filter(p -> p.getExperience() == experience).findAny();
-        if (person != null) return person;
-        return null;
+    static List<String> findPhonesByName(List<Person> list, String name) {
+        return list.stream().filter(p -> p.getName().equalsIgnoreCase(name))
+                .map(Person::getPhoneNumber).toList();
+    }
+
+    static Person findByExperience(List<Person> list, int experience) {
+        assert list != null : "LIST";
+        var opt = list.stream().filter(p -> p.getExperience() == experience).findAny();
+        return opt.orElse(null);
     }
 
     public static Person findPersonById(List<Person> persons, int id){
 
-        Person person = persons.stream().filter(p -> p.getId() == id).findAny().get();
-        if (person != null) return person;
-        return null;      
-        
+        var person = persons.stream().filter(p -> p.getId() == id).findAny();
+
+        return person.orElse(null);
+
     }
-
-    
-    
-
-
 }
